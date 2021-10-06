@@ -9,12 +9,12 @@ module.exports = (app) => {
 
     });
 
-    app.post('/login', (req, res) => {
+    // app.post('/login', (req, res) => {
 
-        const { Email, Contrasena } = req.body;
-        console.log(req.body);
-        const user = new User({ Email , Contrasena })
+    //     const { Email, Contrasena } = req.body;
+    //     console.log(req.body);
+    //     const user = new User({ Email , Contrasena })
 
-    });
+    // });
     
 }

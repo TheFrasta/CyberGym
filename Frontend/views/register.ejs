@@ -10,7 +10,8 @@
     <label for="_contrasena">Contraseña:</label>
     <input type="" name="Contrasena" id="_contrasena" placeholder="Ingrese su Contraseña" required>
     <button class="btn btn-primary" id="">Registrar</button> -->
-    <form class="form-signin" onsubmit="ajax()" action="/register" target="" method="POST" name="form-register">
+    <div id="mensaje" style="display:none" class="alert alert-success" role="alert">¡Usuario creado!</div>
+    <form class="form-signin" id="formulario" onsubmit="ajax()" action="/register" target="" method="POST" name="form-register">
         <img class="mb-4" src="../assets/Gym-Logo-Graphics-1-18.jpg" alt="" width="82" height="82">
         <h1 class="h3 mb-3 font-weight-normal">Formulario de Registro</h1><br>
         <label for="_nombre" class="sr-only">Nombre</label>
