@@ -14,10 +14,9 @@ module.exports = (app) => {
 
         const { Nombre, Email, Contrasena } = req.body;
         const user = new User({ Nombre, Email, Contrasena })
-
-        const salt = await bcrypt.genSaltSync(10);
+        const salt = await bcrypt.genSalt(10);
         user.Contrasena = await bcrypt.hash(user.Contrasena, salt);
-
+        console.log(user.Contrasena)
         user.save(err => {
 
             if (err) {

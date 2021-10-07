@@ -2,7 +2,7 @@
 <link href="../style.css" rel="stylesheet">
 
 <div class="text-center">
-    <form class="form-signin" action="/register" target="" method="POST" name="form-register">
+    <form class="form-signin" onsubmit="ajaxlog()" action="/login" target="" method="POST" name="form-register">
         <img class="mb-4" src="../assets/Gym-Logo-Graphics-1-18.jpg" alt="" width="82" height="82">
         <h1 class="h3 mb-3 font-weight-normal">Iniciar Sesión</h1><br>
         <label for="_email" class="sr-only">Email address</label>
@@ -14,8 +14,9 @@
             <input type="checkbox" value="remember-me"> Recordarme
           </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button><br>
+        <div id="InvalidEmail" style="display:none" class="alert alert-danger" role="alert">Ponga bien el email</div> 
       </form>
     </div>
 
-    <!-- <script src="../js/app.js"></script> -->
+    <script src="../js/app.js"></script>

@@ -9,12 +9,12 @@ const bcrypt = require('bcrypt');
 
 //Connect to DB.
 mongoose.connect('mongodb://localhost/CyberGymDB')
-.then(() => console.log('base de datos conectada'))
-.catch(e => console.log(e))
+    .then(() => console.log('base de datos conectada'))
+    .catch(e => console.log(e))
 
 //BodyParser (Envio de base datos).
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 
 //View Engine and ejs Module.
