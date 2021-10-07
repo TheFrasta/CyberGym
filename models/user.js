@@ -1,13 +1,14 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const bcrypt = require('bcrypt')
 
 const UserSchema = new Schema({
 
-Nombre:         String,
-Email:          String,
-Contrasena:     String
+    Nombre: String,
+    Email: String,
+    Contrasena: String
 
-}) 
+})
 
 // Modelo Export
 

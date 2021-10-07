@@ -5,6 +5,7 @@ const path = require('path');
 const expressLayouts = require('express-ejs-Layouts');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
 
 //Connect to DB.
 mongoose.connect('mongodb://localhost/CyberGymDB')
