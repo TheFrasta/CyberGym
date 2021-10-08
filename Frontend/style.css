@@ -1,3 +1,9 @@
 .form-control{
     text-align: center;
 }
+
+#InvalidEmail{
+
+    margin-top: 25px;
+
+}

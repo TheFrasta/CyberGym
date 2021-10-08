@@ -13,24 +13,19 @@ module.exports = (app) => {
     app.post('/login', async (req, res) => {
 
         const {Email, Contrasena } = req.body;
+        console.log(req.body);
         const user = await User.findOne({ Email })
+        const isMatch = await bcrypt.compare(Contrasena, user.Contrasena);
 
         if(!user){
             res.status(401).json({ msj : 'email or password invalid' })
         }
-        const isMatch = await bcrypt.compare(Contrasena, user.Contrasena);
         if(!isMatch){
             res.status(401).json({ msj : 'email or password invalid' })
         }
+        if(isMatch && user){
+            res.status(200).json({ msj : 'Ha iniciado sesion' })
+        }
         
-        //         if (User === null) {
-        //             res.status(400).send('El usuario no existe');
-        //         }
-        //         try {
-        //             bcrypt.compare()
-        //         } catch {
-        //             res.status(500).send('Ha ocurrido un error');
-        //         }
-
     })
 }

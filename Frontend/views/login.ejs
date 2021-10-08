@@ -1,7 +1,8 @@
 <link href="../css/signin.css" rel="stylesheet">
 <link href="../style.css" rel="stylesheet">
 
-<div class="text-center">
+<div id="GotoInventory" style="display:none" class="alert alert-success text-center" role="alert">¡Inicio sesion con exito!</div> 
+<div class="text-center" id="LogInFormulario">
     <form class="form-signin" onsubmit="ajaxlog()" action="/login" target="" method="POST" name="form-register">
         <img class="mb-4" src="../assets/Gym-Logo-Graphics-1-18.jpg" alt="" width="82" height="82">
         <h1 class="h3 mb-3 font-weight-normal">Iniciar Sesión</h1><br>
@@ -15,7 +16,7 @@
           </label>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button><br>
-        <div id="InvalidEmail" style="display:none" class="alert alert-danger" role="alert">Ponga bien el email</div> 
+        <div id="InvalidEmail" style="display:none" class="alert alert-danger" role="alert">Email o Contraseña incorrecta</div> 
       </form>
     </div>
 

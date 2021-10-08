@@ -14,11 +14,18 @@ module.exports = (app) => {
 
         const { Nombre, Email, Contrasena } = req.body;
         const user = new User({ Nombre, Email, Contrasena })
+        const email = await User.findOne({Email})
         const salt = await bcrypt.genSalt(10);
         user.Contrasena = await bcrypt.hash(user.Contrasena, salt);
-        console.log(user.Contrasena)
-        user.save(err => {
+        
+        if(email){
+            
+           return res.status(401).json({msj: 'El email ya esta en uso'})
 
+        }
+
+        user.save(err => {
+    
             if (err) {
 
                 res.status(500).json({ msj: 'Error al registrar el usuario' });
@@ -34,4 +41,5 @@ module.exports = (app) => {
     });
 
 }
+
 
