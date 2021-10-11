@@ -7,6 +7,10 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const ejs = require('ejs');
+
+//TOKENS ENV
+const dotenv = require('dotenv').config()
+
 //Connect to DB.
 mongoose.connect('mongodb://localhost/CyberGymDB')
     .then(() => console.log('base de datos conectada'))
@@ -33,6 +37,10 @@ app.use(express.static('Frontend'));
 
 //Routes
 require('./routes')(app)
+
+//JWT
+const jwt = require('jsonwebtoken');
+app.use(express.urlencoded())
 
 //Servidor On.
 app.listen(2000, () => {
