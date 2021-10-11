@@ -6,6 +6,7 @@ const expressLayouts = require('express-ejs-Layouts');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
+const ejs = require('ejs');
 //Connect to DB.
 mongoose.connect('mongodb://localhost/CyberGymDB')
     .then(() => console.log('base de datos conectada'))

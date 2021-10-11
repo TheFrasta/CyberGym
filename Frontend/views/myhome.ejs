@@ -1,21 +1,20 @@
 <table class="table table-striped">
-    <thead>
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">ID</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% User.forEach((usuario, i)=>{%>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">ID</th>
-        <th scope="col">Nombre</th>
-        <th scope="col">Email</th>
+        <th scope="row"><%=i + 1%></th>
+        <td><%= usuario._id %></td>
+        <td><%= usuario.Nombre %></td>
+        <td><%= usuario.Email %></td>
       </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>PRUEBA</td>
-        <td>PRUEBA</td>
-        <td>PRUEBA</td>
-      </tr>
-    </tbody>
-  </table>
-
-
-<!-- Agregar ForEach -->
+    <%}) %>
+  </tbody>
+</table>

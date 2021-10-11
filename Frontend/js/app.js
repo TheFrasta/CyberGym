@@ -21,8 +21,8 @@ function ajax() {
     }
 
     var data = {
-        Nombre: document.getElementById('_nombre').value,
-        Email: document.getElementById('_email').value,
+        Nombre:     document.getElementById('_nombre').value,
+        Email:      document.getElementById('_email').value,
         Contrasena: document.getElementById('_contrasena').value
     }
 
@@ -36,7 +36,7 @@ function ajaxlog() {
     const InvalidEmail = document.getElementById('InvalidEmail');
     const xhttp = new XMLHttpRequest();
 
-    xhttp.open("POST", "/login",);
+    xhttp.open            ("POST", "/login",);
     xhttp.setRequestHeader('Content-Type', 'application/json')
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {

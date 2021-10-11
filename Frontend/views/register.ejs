@@ -1,37 +1,45 @@
 
+<!-- Hojas de Estilo -->
 <link href="../css/signin.css" rel="stylesheet">
-<link href="../style.css" rel="stylesheet">
-<div class="text-center">
-    <!-- <form class="" id="formulario" action="" target="" method="POST" name="form-register" ></form>
-    <label for="_nombre">Nombre:</label>
-    <input type="" name="Nombre" id="_nombre" placeholder="Ingrese su nombre" required>
-    <label for="_email">Email:</label>
-    <input type="email" name="Email" id="_email" placeholder="Ingrese su Email" required>
-    <label for="_contrasena">Contraseña:</label>
-    <input type="" name="Contrasena" id="_contrasena" placeholder="Ingrese su Contraseña" required>
-    <button class="btn btn-primary" id="">Registrar</button> -->
-    <div id="mensaje" style="display:none" class="alert alert-success" role="alert">¡Usuario creado!</div>
-    <form class="form-signin" id="formulario" onsubmit="ajax()" action="/register" target="" method="POST" name="form-register">
-        <img class="mb-4" src="../assets/Gym-Logo-Graphics-1-18.jpg" alt="" width="82" height="82">
-        <h1 class="h3 mb-3 font-weight-normal">Formulario de Registro</h1><br>
-        <label for="_nombre" class="sr-only">Nombre</label>
-        <input type="text" id="_nombre" class="form-control" placeholder="Ingrese su Nombre" required="" autofocus="">
-        <label for="_email" class="sr-only">Email address</label>
-        <input type="email" id="_email" class="form-control" placeholder="Ingrese su email" required="" autofocus="">
-        <label for="_contrasena" class="sr-only">Password</label>
-        <input type="password" id="_contrasena" class="form-control" placeholder="Ingrese su Contraseña" required="">
-        <div class="checkbox mb-3">
-          <label>
-            <input type="checkbox" value="remember-me"> Recordarme
-          </label>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Registrame</button>
-        <div id="RegisterInvalidEmail" style="display:none" class="alert alert-danger" role="alert">El email ya esta en uso</div>
-      </form>
-    </div>
-<div>
-    <script src="../js/app.js"></script>
+<link href="../style.css"      rel="stylesheet">
 
-<!-- <div id="mensaje" style="display:none">Usuario creado</div>
-    <form class="form" onsubmit="ajax()" id="formulario" action="/register" target="" method="POST" name="form-register">
- -->
+  <!--Formulario-->
+  <div class="text-center">
+
+    <!--Esto es otra alerta-->
+    <div id="mensaje" style="display:none" class="alert alert-success" role="alert">¡Usuario creado!</div>
+
+    <!--Inicio de Formulario-->
+    <form class="form-signin" id="formulario" onsubmit="ajax()" action="/register" target="" method="POST" name="form-register">
+
+      <img class="mb-4" src="../assets/Gym-Logo-Graphics-1-18.jpg" alt="" width="82" height="82">
+      <h1 class="h3 mb-3 font-weight-normal">Formulario de Registro</h1><br>
+
+        
+      <label for="_nombre" class="sr-only">Nombre</label>
+      <input type="text" id="_nombre" class="form-control" placeholder="Ingrese su Nombre" required="" autofocus="">
+
+
+      <label for="_email" class="sr-only">Email address</label>
+      <input type="email" id="_email" class="form-control" placeholder="Ingrese su email" required="" autofocus="">
+
+
+      <label for="_contrasena" class="sr-only">Password</label>
+      <input type="password" id="_contrasena" class="form-control" placeholder="Ingrese su Contraseña" required="">
+
+      <div class="checkbox mb-3">
+      <label><input type="checkbox" value="remember-me"> Recordarme</label>
+      </div>
+
+
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Registrame</button>
+
+      <!--Esto es una alerta-->
+      <div id="RegisterInvalidEmail" style="display:none" class="alert alert-danger" role="alert">El email ya esta en uso</div>
+
+    </form>
+  </div>
+
+
+<!--Este es mi main.js-->
+<script src="../js/app.js"></script>
