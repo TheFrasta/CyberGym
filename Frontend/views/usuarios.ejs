@@ -8,13 +8,5 @@
     </tr>
   </thead>
   <tbody>
-    <% User.forEach((usuario, i)=>{%>
-      <tr>
-        <th scope="row"><%=i + 1%></th>
-        <td><%= usuario._id %></td>
-        <td><%= usuario.Nombre %></td>
-        <td><%= usuario.Email %></td>
-      </tr>
-    <%}) %>
   </tbody>
 </table>

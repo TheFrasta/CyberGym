@@ -21,13 +21,11 @@ module.exports = (app) => {
         const {Email, Contrasena} = req.body;
         console.log(req.body); 
         const user = {Email, Contrasena}
-        const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
-        res.json({ accessToken: accessToken})
-
-        res.header('auth-token', token).json({
-            error: null,
-            data: {token}
-        })
+        const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET,{
+        expiresIn: "15s"
+        });
+   
+        res.status(200).json({ accessToken: accessToken})
 
     })
 
