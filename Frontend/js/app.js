@@ -32,7 +32,7 @@ function ajax() {
 function ajaxlog() {
 
     //Divs Alerts:
-    event.preventDefault();
+    event.preventDefault(); // Detener el envio del formulario.
     const InvalidEmail = document.getElementById('InvalidEmail');
     const xhttp = new XMLHttpRequest();
 
@@ -68,46 +68,67 @@ function ajaxlog() {
     xhttp.send(JSON.stringify(data));
 }
 
-function GetUser() {
+if (window.location.pathname == '/users') {
+   
+    function GetUser() {
 
-    event.preventDefault();
-    const xhttp = new XMLHttpRequest();
-    xhttp.open("GET", "/get-user",);
-    xhttp.setRequestHeader('Content-Type', 'application/json')
-    xhttp.onreadystatechange = function () {
-
-        if (this.readyState == 4 && this.status == 200) {
-            res.json({ msj: "Todo Correcto" });
-        }
-    }
-
-
-}
-
-function UsersRequest(){
-
-    event.preventDefault();
-    const xhttp = new XMLhttpRequest();
-    xhttp.open("GET", "/users");
-    xhttp.onreadystatechange = function(){
-
-        if (this.readyState = 4 && this.status == 200){
-            GetUser()
-        }
-
-    }
-}
-
-function TablaUsuarios(usertb){
-
-const tbody = document.getElementById("t-body");
+        const xhttp = new XMLHttpRequest();
+        
+        xhttp.open("GET", "/get-user",);
+        xhttp.setRequestHeader('Content-Type', 'application/json')
     
-usertb.forEach((usertb, i) => {
+        const localtoken = JSON.parse(localStorage.getItem("tokens")).accessToken;
+        xhttp.setRequestHeader('authenticate', "Bearer " + localtoken);
+    
+        xhttp.onreadystatechange = function () {
+    
+            if (this.readyState == 4 && this.status == 200) {
+                const usersList = xhttp.response.users
+                TablaUsuarios(usersList);
+            }
+        }
+    
+        xhttp.send();
+    
+    }
 
-const tableRow = document.createElement('tr');
-const tableHeader= document.createElement('th');
-tableHeader.scope = "row";
-tableHeader.innerHTML = i + 1;
-
-})
 }
+
+
+// function UsersRequest() {
+
+//     event.preventDefault();
+//     const xhttp = new XMLhttpRequest();
+//     xhttp.open("GET", "/users");
+//     xhttp.onreadystatechange = function () {
+
+//         if (this.readyState = 4 && this.status == 200) {
+//             GetUser()
+//         }
+
+//     }
+//     xhttp.send();
+// }
+
+// function TablaUsuarios(usertb) {
+
+//     const tbody = document.getElementById("t-body");
+
+//     usertb.forEach((usertb, i) => {
+
+//         const tableRow = document.createElement('tr');
+//         const tableHeader = document.createElement('th');
+//         tableHeader.scope = "row";
+//         tableHeader.innerHTML = i + 1;
+//         const tableDataId = user._id
+//         const tableDataNombre = user.Nombre
+//         const tableDataEmail = user.Email
+
+//         tbody.insertAdjacentElement('beforeend', tableRow);
+//         tbody.insertAdjacentElemen('beforeend', tableHeader);
+
+//     })
+
+//     xhttp.send();
+// }
+

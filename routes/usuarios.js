@@ -8,10 +8,10 @@ module.exports = (app) => {
     app.get('/usuarios', async (req, res) => {
 
         res.render('usuarios');
-        
+
     });
 
-    app.get('/get-users', verifyToken, async (req, res) => {
+    app.get('/get-user', verifyToken, async (req, res) => {
 
         const user = await User.find()
 
@@ -21,17 +21,20 @@ module.exports = (app) => {
 
         })
 
-
-
     })
 
-        function verifyToken (req, res, next) {
-        const token = req.header('auth-token')
+    //Authenticate
+    function verifyToken(req, res, next) {
+        const token = req.header['authenticate']
+        console.log(token, 'Soy USUARIOS')
+
         if (!token) return res.status(401).json({ error: 'Acceso denegado' })
         try {
-            const verified = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
-            req.user = verified
-            next() // continuamos
+            const verified = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
+                req.user = verified
+                next()  
+            }) 
+           // continuamos
         } catch (error) {
             res.status(400).json({ error: 'token no es válido' })
         }

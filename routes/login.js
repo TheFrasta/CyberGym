@@ -19,11 +19,11 @@ module.exports = (app) => {
     app.post('/login', (req,res) =>{
 
         const {Email, Contrasena} = req.body;
-        console.log(req.body); 
         const user = {Email, Contrasena}
         const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET,{
-        expiresIn: "15s"
+        expiresIn: "10m"
         });
+        console.log(accessToken, 'SOY LOGIN');
    
         res.status(200).json({ accessToken: accessToken})
 
