@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
+const jwt = require('jsonwebtoken')
 
 module.exports = (app) => {
 
@@ -14,7 +15,7 @@ module.exports = (app) => {
     app.get('/get-user', verifyToken, async (req, res) => {
 
         const user = await User.find()
-
+        console.log(user, 'getusers');
         res.status(200).json({
 
             users: user
@@ -25,17 +26,17 @@ module.exports = (app) => {
 
     //Authenticate
     function verifyToken(req, res, next) {
-        const token = req.header['authenticate']
-        console.log(token, 'Soy USUARIOS')
+        const token = req.headers['authenticate']
 
+        if (true){
+            
         if (!token) return res.status(401).json({ error: 'Acceso denegado' })
-        try {
-            const verified = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
+            const verified = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
                 req.user = verified
-                next()  
-            }) 
-           // continuamos
-        } catch (error) {
+                // console.log(verified)
+                next()
+            // continuamos
+        } else {
             res.status(400).json({ error: 'token no es válido' })
         }
     }

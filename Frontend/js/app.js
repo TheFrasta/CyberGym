@@ -68,67 +68,87 @@ function ajaxlog() {
     xhttp.send(JSON.stringify(data));
 }
 
-if (window.location.pathname == '/users') {
-   
-    function GetUser() {
+if (window.location.pathname == '/usuarios') {
+
+    (function GetUser() {
 
         const xhttp = new XMLHttpRequest();
-        
+        console.log(xhttp);
         xhttp.open("GET", "/get-user",);
         xhttp.setRequestHeader('Content-Type', 'application/json')
-    
+
         const localtoken = JSON.parse(localStorage.getItem("tokens")).accessToken;
-        xhttp.setRequestHeader('authenticate', "Bearer " + localtoken);
-    
+        xhttp.setRequestHeader('authenticate', localtoken);
+
         xhttp.onreadystatechange = function () {
-    
+
             if (this.readyState == 4 && this.status == 200) {
-                const usersList = xhttp.response.users
+                const usersList = JSON.parse(xhttp.response).users
+                console.log(usersList)
                 TablaUsuarios(usersList);
             }
         }
-    
+
         xhttp.send();
-    
-    }
+
+    })();
 
 }
 
 
-// function UsersRequest() {
+function TablaUsuarios(usertb) {
 
-//     event.preventDefault();
-//     const xhttp = new XMLhttpRequest();
-//     xhttp.open("GET", "/users");
-//     xhttp.onreadystatechange = function () {
+    const tbody = document.getElementById("t-body");
 
-//         if (this.readyState = 4 && this.status == 200) {
-//             GetUser()
-//         }
+    usertb.forEach((user, i) => {
 
-//     }
-//     xhttp.send();
-// }
+        //Tabla de Usuarios.
+        const tableRow = document.createElement('tr');
+        const tableHeader = document.createElement('th');
+        tableHeader.scope = "row";
+        tableHeader.innerHTML = i + 1;
+        const tableDataId = document.createElement('td');
+        tableDataId.innerHTML = user._id
+        const tableDataNombre = document.createElement('td');
+        tableDataNombre.innerHTML = user.Nombre
+        const tableDataEmail = document.createElement('td');
+        tableDataEmail.innerHTML = user.Email
+        const tableDataOptions = document.createElement('td');
+        //Lista Ordenada de usuarios.
+        const listUl = document.createElement('ul');
+        // listUl.className = "list-inline-item"
 
-// function TablaUsuarios(usertb) {
+        //Boton para editar usuario.
+        const listUserButton =  document.createElement('li');
+        listUserButton.className = 'list-inline-item';
+        const Button         =  document.createElement('button');
+        Button.className     = 'btn btn-outline-success';
+        Button.innerHTML     = '<i class="fas fa-user-edit"></i>';
 
-//     const tbody = document.getElementById("t-body");
+        // Boton para eliminar el usuario.
+        const listDeleteButton = document.createElement('li');
+        listDeleteButton.className = 'list-inline-item';
+        const Button2     = document.createElement('button');
+        Button2.className = 'btn btn-outline-success';
+        Button2.innerHTML = '<i class="fas fa-trash"></i>';
 
-//     usertb.forEach((usertb, i) => {
+        //Insertando los botones a opciones.
+        tableDataOptions.insertAdjacentElement('beforeend', listUl);
+        listUl.insertAdjacentElement('beforeend', listUserButton);
+        listUl.insertAdjacentElement('beforeend', listDeleteButton);
+        listUserButton.insertAdjacentElement('beforeend', Button);
+        listDeleteButton.insertAdjacentElement('beforeend', Button2);
+        
 
-//         const tableRow = document.createElement('tr');
-//         const tableHeader = document.createElement('th');
-//         tableHeader.scope = "row";
-//         tableHeader.innerHTML = i + 1;
-//         const tableDataId = user._id
-//         const tableDataNombre = user.Nombre
-//         const tableDataEmail = user.Email
+        //Insertando los elementos creados a la tabla de usuarios. 
+        tbody.insertAdjacentElement('beforeend', tableRow);
+        tableRow.insertAdjacentElement('beforeend', tableHeader);
+        tableRow.insertAdjacentElement('beforeend', tableDataId);
+        tableRow.insertAdjacentElement('beforeend', tableDataNombre);
+        tableRow.insertAdjacentElement('beforeend', tableDataEmail);
+        tableRow.insertAdjacentElement('beforeend', tableDataOptions);
 
-//         tbody.insertAdjacentElement('beforeend', tableRow);
-//         tbody.insertAdjacentElemen('beforeend', tableHeader);
 
-//     })
 
-//     xhttp.send();
-// }
-
+    })
+}

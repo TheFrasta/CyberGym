@@ -16,16 +16,31 @@ module.exports = (app) => {
 
     //Probando
 
-    app.post('/login', (req,res) =>{
+    app.post('/login', async (req, res) => {
 
-        const {Email, Contrasena} = req.body;
-        const user = {Email, Contrasena}
-        const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET,{
-        expiresIn: "10m"
-        });
-        console.log(accessToken, 'SOY LOGIN');
-   
-        res.status(200).json({ accessToken: accessToken})
+        const { Email, Contrasena } = req.body;
+        const user = { Email, Contrasena };
+        const userfind = await User.findOne({ Email });
+
+        if (!userfind) {
+            return res.status(401).json({ msj: 'email or password invalid' })
+        }
+        const isMatch = await bcrypt.compare(Contrasena, userfind.Contrasena);
+        if (!isMatch) {
+            res.status(401).json({ msj: 'email or password invalid' })
+        }
+        if (isMatch && user) {
+
+            const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
+                expiresIn: "10m"
+            });
+
+            console.log(accessToken, 'SOY LOGIN');
+
+            res.status(200).json({ accessToken: accessToken, msj: 'Ha iniciado sesion correctamente' });
+
+        }
+
 
     })
 
@@ -36,7 +51,7 @@ module.exports = (app) => {
     //     const { Email, Contrasena } = req.body;
     //     const user = await User.findOne({ Email })
     //     const isMatch = await bcrypt.compare(Contrasena, user.Contrasena);
-        
+
     //     if (!user) {
     //         res.status(401).json({ msj: 'email or password invalid' })
     //     }
@@ -48,6 +63,6 @@ module.exports = (app) => {
     //     }
 
     // })
-    
+
 }
 
