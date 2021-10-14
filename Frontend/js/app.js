@@ -1,4 +1,4 @@
-
+//Funcion para registrarse, envia los datos del usuario a la base de datos.
 function ajax() {
     event.preventDefault();
     const xhttp = new XMLHttpRequest();
@@ -6,18 +6,33 @@ function ajax() {
 
     xhttp.setRequestHeader('Content-Type', 'application/json')
     xhttp.onreadystatechange = function () {
+
         if (this.readyState == 4 && this.status == 200) {
             console.log(this.responseText);
             document.getElementById('formulario').style.display = 'none'
             document.getElementById('mensaje').style.display = 'block'
-            setTimeout(() => {
-                window.location.href = "/login";
-            }, 3000);
+            if (window.location.pathname == "/register") {
+                setTimeout(() => {
+                    window.location.href = "/login";
+                }, 3000);
+            }
+            else if (window.location.pathname == "/usuarios"){
+
+                // const modal = bootstrap.Modal.getInstance(document.getElementById('exampleModalCenter'));
+
+                bootstrap.Modal.getInstance(document.getElementById('exampleModalCenter')).hide()
+                // console.log(modal);
+                // modal.hide();
+    
+            }
+
+
         }
 
         if (this.readyState == 4 && this.status == 401) {
             document.getElementById('RegisterInvalidEmail').style.display = "block";
         }
+
     }
 
     var data = {
@@ -29,6 +44,7 @@ function ajax() {
     xhttp.send(JSON.stringify(data));
 }
 
+//Esta funcion es (Login), envia data al servidor y la compara.
 function ajaxlog() {
 
     //Divs Alerts:
@@ -68,12 +84,12 @@ function ajaxlog() {
     xhttp.send(JSON.stringify(data));
 }
 
+//Si se cumple esto, tendria que lanzarme la informacion de la base datos.
 if (window.location.pathname == '/usuarios') {
 
     (function GetUser() {
 
         const xhttp = new XMLHttpRequest();
-        console.log(xhttp);
         xhttp.open("GET", "/get-user",);
         xhttp.setRequestHeader('Content-Type', 'application/json')
 
@@ -84,8 +100,9 @@ if (window.location.pathname == '/usuarios') {
 
             if (this.readyState == 4 && this.status == 200) {
                 const usersList = JSON.parse(xhttp.response).users
-                console.log(usersList)
                 TablaUsuarios(usersList);
+                document.getElementById('addUserModal').classList.remove('d-none');
+               
             }
         }
 
@@ -95,7 +112,7 @@ if (window.location.pathname == '/usuarios') {
 
 }
 
-
+//Tabla de Usuarios creada en JS.
 function TablaUsuarios(usertb) {
 
     const tbody = document.getElementById("t-body");
@@ -119,16 +136,16 @@ function TablaUsuarios(usertb) {
         // listUl.className = "list-inline-item"
 
         //Boton para editar usuario.
-        const listUserButton =  document.createElement('li');
+        const listUserButton = document.createElement('li');
         listUserButton.className = 'list-inline-item';
-        const Button         =  document.createElement('button');
-        Button.className     = 'btn btn-outline-success';
-        Button.innerHTML     = '<i class="fas fa-user-edit"></i>';
+        const Button = document.createElement('button');
+        Button.className = 'btn btn-outline-success';
+        Button.innerHTML = '<i class="fas fa-user-edit"></i>';
 
         // Boton para eliminar el usuario.
         const listDeleteButton = document.createElement('li');
         listDeleteButton.className = 'list-inline-item';
-        const Button2     = document.createElement('button');
+        const Button2 = document.createElement('button');
         Button2.className = 'btn btn-outline-success';
         Button2.innerHTML = '<i class="fas fa-trash"></i>';
 
@@ -138,7 +155,7 @@ function TablaUsuarios(usertb) {
         listUl.insertAdjacentElement('beforeend', listDeleteButton);
         listUserButton.insertAdjacentElement('beforeend', Button);
         listDeleteButton.insertAdjacentElement('beforeend', Button2);
-        
+
 
         //Insertando los elementos creados a la tabla de usuarios. 
         tbody.insertAdjacentElement('beforeend', tableRow);
@@ -152,3 +169,4 @@ function TablaUsuarios(usertb) {
 
     })
 }
+

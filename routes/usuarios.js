@@ -15,7 +15,6 @@ module.exports = (app) => {
     app.get('/get-user', verifyToken, async (req, res) => {
 
         const user = await User.find()
-        console.log(user, 'getusers');
         res.status(200).json({
 
             users: user
@@ -28,32 +27,16 @@ module.exports = (app) => {
     function verifyToken(req, res, next) {
         const token = req.headers['authenticate']
 
-        if (true){
-            
-        if (!token) return res.status(401).json({ error: 'Acceso denegado' })
+        if (true) {
+
+            if (!token) return res.status(401).json({ error: 'Acceso denegado' })
             const verified = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
-                req.user = verified
-                // console.log(verified)
-                next()
+            req.user = verified
+            // console.log(verified)
+            next()
             // continuamos
         } else {
             res.status(400).json({ error: 'token no es válido' })
         }
     }
-
 }
-
-
-    // if (token == null) return res.sendStatus(401)
-
-    // jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-    //         if(err) return res.sendStatus(403);
-    //         req.user = user
-    //         next()
-    //         })
-
-
-    // function authenticateToken(req, res, next) {
-    //         const authHeader = req.headers['authorization'];
-    //         const token = authHeader && authHeader.split('')[1]
-    // }
