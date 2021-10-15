@@ -11,19 +11,24 @@ function ajax() {
             console.log(this.responseText);
             document.getElementById('formulario').style.display = 'none'
             document.getElementById('mensaje').style.display = 'block'
+            console.log('PRUEBA');
+
             if (window.location.pathname == "/register") {
                 setTimeout(() => {
                     window.location.href = "/login";
                 }, 3000);
-            }
-            else if (window.location.pathname == "/usuarios"){
+     
 
-                // const modal = bootstrap.Modal.getInstance(document.getElementById('exampleModalCenter'));
+            } else if (window.location.pathname == "/usuarios") {
 
-                bootstrap.Modal.getInstance(document.getElementById('exampleModalCenter')).hide()
-                // console.log(modal);
-                // modal.hide();
-    
+                var modal = bootstrap.Modal.getInstance(document.getElementById('exampleModalCenter'));
+                setTimeout(() => {
+
+                    modal.hide();
+
+                }, 3000);
+
+
             }
 
 
@@ -60,7 +65,7 @@ function ajaxlog() {
             localStorage.setItem("tokens", JSON.stringify({
                 accessToken: JSON.parse(xhttp.response).accessToken
             })),
-                document.getElementById('LogInFormulario').style.display = 'none'
+            document.getElementById('LogInFormulario').style.display = 'none'
             document.getElementById('GotoInventory').style.display = 'block'
             setTimeout(() => {
                 window.location.href = '/usuarios'
@@ -102,7 +107,7 @@ if (window.location.pathname == '/usuarios') {
                 const usersList = JSON.parse(xhttp.response).users
                 TablaUsuarios(usersList);
                 document.getElementById('addUserModal').classList.remove('d-none');
-               
+
             }
         }
 
@@ -138,9 +143,11 @@ function TablaUsuarios(usertb) {
         //Boton para editar usuario.
         const listUserButton = document.createElement('li');
         listUserButton.className = 'list-inline-item';
-        const Button = document.createElement('button');
-        Button.className = 'btn btn-outline-success';
-        Button.innerHTML = '<i class="fas fa-user-edit"></i>';
+        const EditButton = document.createElement('button');
+        EditButton.className = 'btn btn-outline-success';
+        EditButton.innerHTML = '<i class="fas fa-user-edit"></i>';
+        EditButton.setAttribute("data-bs-target","#Editmodal");
+        EditButton.setAttribute("data-bs-toggle","modal");
 
         // Boton para eliminar el usuario.
         const listDeleteButton = document.createElement('li');
@@ -149,11 +156,12 @@ function TablaUsuarios(usertb) {
         Button2.className = 'btn btn-outline-success';
         Button2.innerHTML = '<i class="fas fa-trash"></i>';
 
+
         //Insertando los botones a opciones.
         tableDataOptions.insertAdjacentElement('beforeend', listUl);
         listUl.insertAdjacentElement('beforeend', listUserButton);
         listUl.insertAdjacentElement('beforeend', listDeleteButton);
-        listUserButton.insertAdjacentElement('beforeend', Button);
+        listUserButton.insertAdjacentElement('beforeend', EditButton);
         listDeleteButton.insertAdjacentElement('beforeend', Button2);
 
 
@@ -166,7 +174,9 @@ function TablaUsuarios(usertb) {
         tableRow.insertAdjacentElement('beforeend', tableDataOptions);
 
 
-
     })
+
+
+
 }
 
