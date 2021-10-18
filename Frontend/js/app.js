@@ -117,6 +117,26 @@ if (window.location.pathname == '/usuarios') {
 
 }
 
+if (window.location.pathname == '/usuarios') {
+
+    function ModifyUser() {
+
+        event.preventDefault();
+        const xhttp = new XMLHttpRequest();
+
+        xhttp.open("POST", "/post-edituser");
+        xhttp.setRequestHeader('Content-type', 'application/json')
+        xhttp.onreadystatechange = function () {
+            if(this.readyState == 4 && this.tatus == 200){
+                console.log(this.responseText);
+                
+            }
+        }
+    }
+
+
+}
+
 //Tabla de Usuarios creada en JS.
 function TablaUsuarios(usertb) {
 
@@ -152,17 +172,18 @@ function TablaUsuarios(usertb) {
         // Boton para eliminar el usuario.
         const listDeleteButton = document.createElement('li');
         listDeleteButton.className = 'list-inline-item';
-        const Button2 = document.createElement('button');
-        Button2.className = 'btn btn-outline-success';
-        Button2.innerHTML = '<i class="fas fa-trash"></i>';
-
+        const DeleteButton = document.createElement('button');
+        DeleteButton.className = 'btn btn-outline-success';
+        DeleteButton.innerHTML = '<i class="fas fa-trash"></i>';
+        DeleteButton.setAttribute("data-bs-target", "#deleteModal");
+        DeleteButton.setAttribute("data-bs-toggle", "modal");
 
         //Insertando los botones a opciones.
         tableDataOptions.insertAdjacentElement('beforeend', listUl);
         listUl.insertAdjacentElement('beforeend', listUserButton);
         listUl.insertAdjacentElement('beforeend', listDeleteButton);
         listUserButton.insertAdjacentElement('beforeend', EditButton);
-        listDeleteButton.insertAdjacentElement('beforeend', Button2);
+        listDeleteButton.insertAdjacentElement('beforeend', DeleteButton);
 
 
         //Insertando los elementos creados a la tabla de usuarios. 
@@ -176,7 +197,4 @@ function TablaUsuarios(usertb) {
 
     })
 
-
-
 }
-

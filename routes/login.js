@@ -32,7 +32,7 @@ module.exports = (app) => {
         if (isMatch && user) {
 
             const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
-                expiresIn: "30m"
+                expiresIn: "60m"
             });
 
             console.log(accessToken, 'SOY LOGIN');

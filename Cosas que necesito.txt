@@ -1,0 +1,1 @@
+Necesito que con el ID del usuario me traiga ese usuario por su ID desde la base de datos, para asi poder editarlo.

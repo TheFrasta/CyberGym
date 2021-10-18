@@ -14,14 +14,32 @@
 
         <div class="text-center">
 
-<div>
-    <h1>Probando duramente</h1>
-</div>
-            <!--Modal Footer-->
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-              <button type="submit" class="btn btn-primary" id="BotonGuardar">Guardar</button>
+          <div>
+
+            <!--Formulario-->
+
+            <div class="text-center" id="editUsersFormulario">
+
+              <form class="form-signin" onsubmit="" action="/userupdate" target="" method="POST" name="">
+
+
+                <label for="_nombre" class="sr-only">Nombre</label>
+                <input type="text" id="_nombreedit" class="form-control" placeholder="Coloque el Nombre" required="">
+
+                <label for="_email" class="sr-only">email</label>
+                <input type="email" id="_emailedit" class="form-control" placeholder="Coloque el Email" required=""
+                  autofocus="">
+
+              </form>
+
             </div>
+
+          </div>
+          <!--Modal Footer-->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary" id="BotonEditar">Editar</button>
+          </div>
           </form>
         </div>
       </div>
@@ -29,8 +47,8 @@
   </div>
 </div>
 
- <!-- Button trigger modal -->
- <button id="editModalButton" type="button" class="btn btn-outline-dark d-none" data-toggle="modal" data-target="#Editmodal" onclick="">
-   
-  </button>
-  
+<!-- Button trigger modal -->
+<button id="editModalButton" type="button" class="btn btn-outline-dark d-none" data-toggle="modal"
+  data-target="#Editmodal" onclick="">
+
+</button>

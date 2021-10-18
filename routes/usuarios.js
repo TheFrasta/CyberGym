@@ -23,6 +23,18 @@ module.exports = (app) => {
 
     })
 
+    app.post('/post-edituser', async (req, res) => {
+
+        const { _id, Nombre, Email } = req.body;
+        // const userdata = { _id };
+        // console.log(userdata);
+        const user = await User.findByIdAndUpdate(_id, {  Nombre, Email } );
+        console.log(user);
+        if (user) {
+            console.log('Se ejecuto correctamente');
+        }
+    })
+
     //Authenticate
     function verifyToken(req, res, next) {
         const token = req.headers['authenticate']
