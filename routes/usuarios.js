@@ -26,13 +26,17 @@ module.exports = (app) => {
     app.post('/post-edituser', async (req, res) => {
 
         const { _id, Nombre, Email } = req.body;
+        console.log(Nombre);
+        const user = await User.findByIdAndUpdate(_id, { Nombre, Email });
+        res.status(200).json({ userdata: user });
+
+        if (!user) {
+
+            res.status(400).json({ msj: 'Error Encontrado' });
+        }
+
         // const userdata = { _id };
         // console.log(userdata);
-        const user = await User.findByIdAndUpdate(_id, {  Nombre, Email } );
-        console.log(user);
-        if (user) {
-            console.log('Se ejecuto correctamente');
-        }
     })
 
     //Authenticate

@@ -3,7 +3,6 @@ function ajax() {
     event.preventDefault();
     const xhttp = new XMLHttpRequest();
     xhttp.open("POST", "/register",);
-
     xhttp.setRequestHeader('Content-Type', 'application/json')
     xhttp.onreadystatechange = function () {
 
@@ -17,7 +16,7 @@ function ajax() {
                 setTimeout(() => {
                     window.location.href = "/login";
                 }, 3000);
-     
+
 
             } else if (window.location.pathname == "/usuarios") {
 
@@ -25,6 +24,13 @@ function ajax() {
                 setTimeout(() => {
 
                     modal.hide();
+
+                }, 3000);
+
+                document.getElementById('formulario').style.display = 'block'
+                setTimeout(() => {
+
+                    document.getElementById('mensaje').style.display = 'none'
 
                 }, 3000);
 
@@ -65,7 +71,7 @@ function ajaxlog() {
             localStorage.setItem("tokens", JSON.stringify({
                 accessToken: JSON.parse(xhttp.response).accessToken
             })),
-            document.getElementById('LogInFormulario').style.display = 'none'
+                document.getElementById('LogInFormulario').style.display = 'none'
             document.getElementById('GotoInventory').style.display = 'block'
             setTimeout(() => {
                 window.location.href = '/usuarios'
@@ -88,6 +94,7 @@ function ajaxlog() {
 
     xhttp.send(JSON.stringify(data));
 }
+
 
 //Si se cumple esto, tendria que lanzarme la informacion de la base datos.
 if (window.location.pathname == '/usuarios') {
@@ -117,25 +124,44 @@ if (window.location.pathname == '/usuarios') {
 
 }
 
-if (window.location.pathname == '/usuarios') {
+function Update(_id) {
 
-    function ModifyUser() {
+    if (_id) {
+        var modal = document.getElementById('editModal');
+        modal.setAttribute('editModalId', _id);
+    } else {
 
         event.preventDefault();
         const xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "/post-edituser",);
+        xhttp.setRequestHeader('Content-Type', 'application/json')
+        console.log('Prueba');
 
-        xhttp.open("POST", "/post-edituser");
-        xhttp.setRequestHeader('Content-type', 'application/json')
         xhttp.onreadystatechange = function () {
-            if(this.readyState == 4 && this.tatus == 200){
+
+            if (this.readyState == 4 && this.status == 200) {
                 console.log(this.responseText);
-                
             }
+
         }
+
+        const data = {
+
+
+            _id: document.getElementById('editModal').getAttribute('editModalId'),
+            Nombre: document.getElementById('_nombreedit').value,
+            Email: document.getElementById('_emailedit').value,
+
+        }
+
+        console.log(data);
+        xhttp.send(JSON.stringify(data));
+
     }
 
 
 }
+
 
 //Tabla de Usuarios creada en JS.
 function TablaUsuarios(usertb) {
@@ -146,6 +172,8 @@ function TablaUsuarios(usertb) {
 
         //Tabla de Usuarios.
         const tableRow = document.createElement('tr');
+        tableRow.id = user._id;
+        // tableRow.id = i + 1;
         const tableHeader = document.createElement('th');
         tableHeader.scope = "row";
         tableHeader.innerHTML = i + 1;
@@ -166,8 +194,9 @@ function TablaUsuarios(usertb) {
         const EditButton = document.createElement('button');
         EditButton.className = 'btn btn-outline-success';
         EditButton.innerHTML = '<i class="fas fa-user-edit"></i>';
-        EditButton.setAttribute("data-bs-target","#Editmodal");
-        EditButton.setAttribute("data-bs-toggle","modal");
+        EditButton.setAttribute("data-bs-target", "#editModal");
+        EditButton.setAttribute("data-bs-toggle", "modal");
+        EditButton.addEventListener('click', () => Update(user._id));
 
         // Boton para eliminar el usuario.
         const listDeleteButton = document.createElement('li');
@@ -197,4 +226,8 @@ function TablaUsuarios(usertb) {
 
     })
 
+
+
 }
+
+

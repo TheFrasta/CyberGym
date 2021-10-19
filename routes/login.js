@@ -35,8 +35,6 @@ module.exports = (app) => {
                 expiresIn: "60m"
             });
 
-            console.log(accessToken, 'SOY LOGIN');
-
             res.status(200).json({ accessToken: accessToken, msj: 'Ha iniciado sesion correctamente' });
 
         }
