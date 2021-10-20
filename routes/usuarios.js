@@ -17,7 +17,7 @@ module.exports = (app) => {
         const user = await User.find()
         res.status(200).json({ users: user })
 
-    })
+    });
 
     app.post('/post-edituser', async (req, res) => {
 
@@ -54,8 +54,19 @@ module.exports = (app) => {
         await User.findByIdAndUpdate(_id, { Nombre, Email });
         return res.status(200).json({ msj: 'Usuario ha sido modificado correctamente' })
 
-    })
+    });
 
+    app.delete('/delete-editdelete', async (req,res) => {
+
+        const { _id } = req.body;
+        const user = await User.deleteOne({_id});
+        console.log(user);
+
+        if(user){
+            res.status(200).json({msj: "a casaaaa"})
+        }
+
+    })
 
     //Authenticate
     function verifyToken(req, res, next) {

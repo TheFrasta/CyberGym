@@ -124,6 +124,7 @@ if (window.location.pathname == '/usuarios') {
 
 }
 
+//HTTP request para el Edit Button.
 function Update(_id) {
 
     if (_id) {
@@ -162,24 +163,30 @@ function Update(_id) {
 
 }
 
+//HTTP Request para el Delete Button.
 function Delete(_id) {
 
     if (_id) {
 
-        var modal = document.getElementById('editModal');
-        modal.setAttribute('editModalId', _id);
+        var modal = document.getElementById('deleteModal');
+        modal.setAttribute('deleteModalId', _id);
 
     } else {
 
         event.preventDefault(); //Este metodo solo se utiliza en formularios.
         const xhttp = new XMLHttpRequest();
-        xhttp.open("POST", "/post-edituser",);
+        xhttp.open("DELETE", "/delete-editdelete",);
         xhttp.setRequestHeader('Content-Type', 'application/json')
+
+        const id = document.getElementById('deleteModal').getAttribute('deleteModalId')
 
         xhttp.onreadystatechange = function () {
 
             if (this.readyState == 4 && this.status == 200) {
                 console.log(this.responseText);
+                const row = document.getElementById(id);
+                row.remove();
+
             }
 
         }
@@ -187,9 +194,8 @@ function Delete(_id) {
         const data = {
 
 
-            _id: document.getElementById('editModal').getAttribute('editModalId'),
-            Nombre: document.getElementById('_nombreedit').value,
-            Email: document.getElementById('_emailedit').value,
+            _id: id //fila 181
+
 
         }
 
