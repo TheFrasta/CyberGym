@@ -127,15 +127,16 @@ if (window.location.pathname == '/usuarios') {
 function Update(_id) {
 
     if (_id) {
+
         var modal = document.getElementById('editModal');
         modal.setAttribute('editModalId', _id);
+
     } else {
 
-        event.preventDefault();
+        event.preventDefault(); //Este metodo solo se utiliza en formularios.
         const xhttp = new XMLHttpRequest();
         xhttp.open("POST", "/post-edituser",);
         xhttp.setRequestHeader('Content-Type', 'application/json')
-        console.log('Prueba');
 
         xhttp.onreadystatechange = function () {
 
@@ -154,13 +155,51 @@ function Update(_id) {
 
         }
 
-        console.log(data);
         xhttp.send(JSON.stringify(data));
 
     }
 
 
 }
+
+function Delete(_id) {
+
+    if (_id) {
+
+        var modal = document.getElementById('editModal');
+        modal.setAttribute('editModalId', _id);
+
+    } else {
+
+        event.preventDefault(); //Este metodo solo se utiliza en formularios.
+        const xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "/post-edituser",);
+        xhttp.setRequestHeader('Content-Type', 'application/json')
+
+        xhttp.onreadystatechange = function () {
+
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(this.responseText);
+            }
+
+        }
+
+        const data = {
+
+
+            _id: document.getElementById('editModal').getAttribute('editModalId'),
+            Nombre: document.getElementById('_nombreedit').value,
+            Email: document.getElementById('_emailedit').value,
+
+        }
+
+        xhttp.send(JSON.stringify(data));
+
+    }
+
+
+}
+
 
 
 //Tabla de Usuarios creada en JS.
@@ -206,6 +245,7 @@ function TablaUsuarios(usertb) {
         DeleteButton.innerHTML = '<i class="fas fa-trash"></i>';
         DeleteButton.setAttribute("data-bs-target", "#deleteModal");
         DeleteButton.setAttribute("data-bs-toggle", "modal");
+        DeleteButton.addEventListener('click', () => Delete(user._id));
 
         //Insertando los botones a opciones.
         tableDataOptions.insertAdjacentElement('beforeend', listUl);

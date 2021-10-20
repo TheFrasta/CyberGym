@@ -15,29 +15,47 @@ module.exports = (app) => {
     app.get('/get-user', verifyToken, async (req, res) => {
 
         const user = await User.find()
-        res.status(200).json({
-
-            users: user
-
-        })
+        res.status(200).json({ users: user })
 
     })
 
     app.post('/post-edituser', async (req, res) => {
 
         const { _id, Nombre, Email } = req.body;
-        console.log(Nombre);
-        const user = await User.findByIdAndUpdate(_id, { Nombre, Email });
-        res.status(200).json({ userdata: user });
+        const user = await User.findOne({_id});
+        console.log(user);
 
-        if (!user) {
-
-            res.status(400).json({ msj: 'Error Encontrado' });
+        if (Nombre == "") {
+            return res.status(406).json({ msj: 'El Nombre no puede estar vacio' })
         }
 
-        // const userdata = { _id };
-        // console.log(userdata);
+        if (Email == "") {
+            return res.status(406).json({ msj: 'El email no puede estar vacio' })
+
+        }
+
+        console.log(Email);
+        console.log(user.Email);
+
+        if (Email != user.Email) {
+
+            console.log(Email);
+            const email = await User.findOne({Email: Email});
+            console.log(email);
+
+            if (email) {
+
+                return res.status(401).json({ msj: 'El email esta en uso' })
+
+            }
+
+        }
+
+        await User.findByIdAndUpdate(_id, { Nombre, Email });
+        return res.status(200).json({ msj: 'Usuario ha sido modificado correctamente' })
+
     })
+
 
     //Authenticate
     function verifyToken(req, res, next) {
