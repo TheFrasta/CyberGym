@@ -10,7 +10,6 @@ function ajax() {
             console.log(this.responseText);
             document.getElementById('formulario').style.display = 'none'
             document.getElementById('mensaje').style.display = 'block'
-            console.log('PRUEBA');
 
             if (window.location.pathname == "/register") {
                 setTimeout(() => {
@@ -20,7 +19,9 @@ function ajax() {
 
             } else if (window.location.pathname == "/usuarios") {
 
-                var modal = bootstrap.Modal.getInstance(document.getElementById('exampleModalCenter'));
+
+                const modal = bootstrap.Modal.getInstance(document.getElementById('exampleModalCenter'));
+                console.log(modal);
                 setTimeout(() => {
 
                     modal.hide();
@@ -129,7 +130,7 @@ function Update(_id) {
 
     if (_id) {
 
-        var modal = document.getElementById('editModal');
+        const modal = document.getElementById('editModal');
         modal.setAttribute('editModalId', _id);
 
     } else {
@@ -143,6 +144,7 @@ function Update(_id) {
 
             if (this.readyState == 4 && this.status == 200) {
                 console.log(this.responseText);
+
             }
 
         }
@@ -168,7 +170,8 @@ function Delete(_id) {
 
     if (_id) {
 
-        var modal = document.getElementById('deleteModal');
+        const modal = document.getElementById('deleteModal');
+        console.log(modal);
         modal.setAttribute('deleteModalId', _id);
 
     } else {
@@ -183,10 +186,11 @@ function Delete(_id) {
         xhttp.onreadystatechange = function () {
 
             if (this.readyState == 4 && this.status == 200) {
+
                 console.log(this.responseText);
                 const row = document.getElementById(id);
                 row.remove();
-
+        
             }
 
         }
@@ -271,6 +275,9 @@ function TablaUsuarios(usertb) {
 
 
     })
+
+    // const modal = bootstrap.Modal.getInstance(document.getElementById('deleteModal'));
+    // modal.hide();
 
 
 

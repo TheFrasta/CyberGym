@@ -64,6 +64,8 @@ module.exports = (app) => {
 
         if(user){
             res.status(200).json({msj: "a casaaaa"})
+        }else{
+            res.status(500).json({msj: "Error no identificado"})
         }
 
     })
