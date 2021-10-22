@@ -1,0 +1,3 @@
+Para conseguir que ambos modales funcionen necesite cambiar de lugar mi JS que desconozco para que funciona, pero hace funcionar el primer boton, 
+(Buscar dentro del layout), Tambien cambie uno de los nombres de "aria-labelledby" pero no creo que tenga mucho que ver,
+finalmente debo de revisar para que funciona el JS que estaba utilizandio anteriormente.

@@ -13,15 +13,17 @@ function ajax() {
 
             if (window.location.pathname == "/register") {
                 setTimeout(() => {
+
                     window.location.href = "/login";
+
                 }, 3000);
 
 
             } else if (window.location.pathname == "/usuarios") {
 
-
-                const modal = bootstrap.Modal.getInstance(document.getElementById('exampleModalCenter'));
+                const modal = bootstrap.Modal.getInstance(document.getElementById('createModal'));
                 console.log(modal);
+
                 setTimeout(() => {
 
                     modal.hide();
@@ -132,6 +134,15 @@ function Update(_id) {
 
         const modal = document.getElementById('editModal');
         modal.setAttribute('editModalId', _id);
+        const actualrow = document.getElementById(_id).childNodes;
+        console.log(actualrow);
+
+        //Inputs de mi formulario editModal
+        const nombreEdit = document.getElementById('_nombreEdit');
+        const emailEdit = document.getElementById('_emailEdit');
+
+        nombreEdit.value = actualrow[2].innerHTML;
+        emailEdit.value = actualrow[3].innerHTML;
 
     } else {
 
@@ -145,6 +156,10 @@ function Update(_id) {
             if (this.readyState == 4 && this.status == 200) {
                 console.log(this.responseText);
 
+                const modal = bootstrap.Modal.getInstance(document.getElementById('editModal'));
+                console.log(modal);
+                modal.hide();
+
             }
 
         }
@@ -153,8 +168,8 @@ function Update(_id) {
 
 
             _id: document.getElementById('editModal').getAttribute('editModalId'),
-            Nombre: document.getElementById('_nombreedit').value,
-            Email: document.getElementById('_emailedit').value,
+            Nombre: document.getElementById('_nombreEdit').value,
+            Email: document.getElementById('_emailEdit').value,
 
         }
 
@@ -190,7 +205,14 @@ function Delete(_id) {
                 console.log(this.responseText);
                 const row = document.getElementById(id);
                 row.remove();
-        
+
+                const modal = bootstrap.Modal.getInstance(document.getElementById('deleteModal'));
+                console.log(modal);
+                setTimeout(() => {
+                    modal.hide()
+                }, 2000);
+
+
             }
 
         }

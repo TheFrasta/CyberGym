@@ -1,28 +1,25 @@
 
-<!-- Tittle tabla de usuarios -->
-<div id="listadeusuarios">
-  <h2 class="text-center">Lista De Usuarios</h2>
-  </div>
 
-<!-- Partial para el modal -->
-<%- include('./partials/modal.ejs') %>
-<%- include('./partials/deleteModal.ejs') %>
+    <!-- Tittle tabla de usuarios -->
+    <div id="listadeusuarios">
+      <h2 class="text-center">Lista De Usuarios</h2>
+    </div>
+    <!-- Partial para el modal -->
+<%- include('./partials/createModal.ejs') %>
 <%- include('./partials/editModal.ejs') %>
-
-
-<!-- Tabla de usuarios header -->
-<table class="table text-center">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">ID</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Email</th>
-      <th scope="col">Opciones</th>
-    </tr>
-  </thead>
-  <tbody id="t-body">
-  </tbody>
-</table>
-
-
+<%- include('./partials/deleteModal.ejs') %>
+ 
+      <!-- Tabla de usuarios header -->
+      <table class="table text-center">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">ID</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Email</th>
+            <th scope="col">Opciones</th>
+          </tr>
+        </thead>
+        <tbody id="t-body">
+        </tbody>
+      </table>
