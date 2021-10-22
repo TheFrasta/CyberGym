@@ -22,7 +22,7 @@ function ajax() {
             } else if (window.location.pathname == "/usuarios") {
 
                 const modal = bootstrap.Modal.getInstance(document.getElementById('createModal'));
-                console.log(modal);
+                
 
                 setTimeout(() => {
 
@@ -157,7 +157,7 @@ function Update(_id) {
                 console.log(this.responseText);
 
                 const modal = bootstrap.Modal.getInstance(document.getElementById('editModal'));
-                console.log(modal);
+                
                 modal.hide();
 
             }
@@ -207,10 +207,10 @@ function Delete(_id) {
                 row.remove();
 
                 const modal = bootstrap.Modal.getInstance(document.getElementById('deleteModal'));
-                console.log(modal);
-                setTimeout(() => {
-                    modal.hide()
-                }, 2000);
+               
+
+                modal.hide()
+
 
 
             }
