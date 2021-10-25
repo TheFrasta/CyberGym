@@ -22,16 +22,20 @@ module.exports = (app) => {
         const user = { Email, Contrasena };
         const userfind = await User.findOne({ Email });
 
+        const userpass = await User.findOne({ Email }).select('+Contrasena');
+        // select("-Contrasena")/
+        console.log(userfind);
+
         if (!userfind) {
             return res.status(401).json({ msj: 'email or password invalid' })
         }
-        const isMatch = await bcrypt.compare(Contrasena, userfind.Contrasena);
+        const isMatch = await bcrypt.compare(Contrasena, userpass.Contrasena);
         if (!isMatch) {
             res.status(401).json({ msj: 'email or password invalid' })
         }
         if (isMatch && user) {
-
-            const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
+            console.log('HOLA GENTE',userfind);
+            const accessToken = jwt.sign({Nombre: userfind.Nombre, Email: userfind.Email, role: userfind.role}, process.env.ACCESS_TOKEN_SECRET, {
                 expiresIn: "60m"
             });
 

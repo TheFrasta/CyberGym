@@ -6,7 +6,9 @@ const UserSchema = new Schema({
 
     Nombre:     String,
     Email:      String,
-    Contrasena: String
+    Contrasena: {type: String, select: false},
+    role:       String,
+    permisos:   Array, 
 
 })
 

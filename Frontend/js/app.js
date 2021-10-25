@@ -121,7 +121,7 @@ if (window.location.pathname == '/usuarios') {
             }
         }
 
-        xhttp.send();
+        xhttp.send(localtoken);
 
     })();
 

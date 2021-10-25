@@ -1,8 +1,9 @@
-const express = require('express')
+const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const {verifyToken, verifyRole} = require('../Frontend/js/Auth');
 
 module.exports = (app) => {
 
@@ -12,8 +13,8 @@ module.exports = (app) => {
 
     });
 
-    app.get('/get-user', verifyToken, async (req, res) => {
-
+    app.get('/get-user', verifyToken, verifyRole('superadmin'), async (req, res) => {
+        console.log('holaaa');
         const user = await User.find()
         res.status(200).json({ users: user })
 
@@ -22,8 +23,8 @@ module.exports = (app) => {
     app.post('/post-edituser', async (req, res) => {
 
         const { _id, Nombre, Email } = req.body;
-        const user = await User.findOne({_id});
-        console.log(user);
+        const user = await User.findOne({ _id });
+        // console.log('Hola Estoy en Usuarios',user);
 
         if (Nombre == "") {
             return res.status(406).json({ msj: 'El Nombre no puede estar vacio' })
@@ -40,7 +41,7 @@ module.exports = (app) => {
         if (Email != user.Email) {
 
             console.log(Email);
-            const email = await User.findOne({Email: Email});
+            const email = await User.findOne({ Email: Email });
             console.log(email);
 
             if (email) {
@@ -56,34 +57,20 @@ module.exports = (app) => {
 
     });
 
-    app.delete('/delete-editdelete', async (req,res) => {
+    app.delete('/delete-editdelete', async (req, res) => {
 
         const { _id } = req.body;
-        const user = await User.deleteOne({_id});
+        const user = await User.deleteOne({ _id });
         console.log(user);
 
-        if(user){
-            res.status(200).json({msj: "a casaaaa"})
-        }else{
-            res.status(500).json({msj: "Error no identificado"})
+        if (user) {
+            res.status(200).json({ msj: "a casaaaa" })
+        } else {
+            res.status(500).json({ msj: "Error no identificado" })
         }
 
     })
 
-    //Authenticate
-    function verifyToken(req, res, next) {
-        const token = req.headers['authenticate']
 
-        if (true) {
-
-            if (!token) return res.status(401).json({ error: 'Acceso denegado' })
-            const verified = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
-            req.user = verified
-            // console.log(verified)
-            next()
-            // continuamos
-        } else {
-            res.status(400).json({ error: 'token no es válido' })
-        }
-    }
 }
+
