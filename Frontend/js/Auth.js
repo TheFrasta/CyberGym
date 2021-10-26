@@ -21,7 +21,7 @@ function verifyRole(role) {
 
         const roleHeader = req.headers['authenticate']
         const decodeUserInfo = jwt.decode(roleHeader);
-        console.log(decodeUserInfo);
+        console.log(decodeUserInfo, 'Estoy en Auth');
 
 
         if (decodeUserInfo.role === role) {
@@ -38,6 +38,15 @@ function verifyRole(role) {
 
 
 }
+
+// function RefreshToken(req, res, next) {
+//     // const { Email } = req.body;
+//     const userfind = await User.findOne({ Email });
+//     const refreshToken = jwt.sign({Nombre: userfind.Nombre, Email: userfind.Email, role: userfind.role}, process.env.REFRESH_TOKEN_SECRET, {
+//         expiresIn: "1y"
+//     });
+
+//     }
 
 
 module.exports = { verifyRole, verifyToken };

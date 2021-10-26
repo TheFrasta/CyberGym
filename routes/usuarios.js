@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
-const {verifyToken, verifyRole} = require('../Frontend/js/Auth');
+const {verifyToken, verifyRole, RefreshToken} = require('../Frontend/js/Auth');
 
 module.exports = (app) => {
 
@@ -14,7 +14,7 @@ module.exports = (app) => {
     });
 
     app.get('/get-user', verifyToken, verifyRole('superadmin'), async (req, res) => {
-        console.log('holaaa');
+        
         const user = await User.find()
         res.status(200).json({ users: user })
 
@@ -35,7 +35,7 @@ module.exports = (app) => {
 
         }
 
-        console.log(Email);
+        console.log(Email, 'Estoy En usuarios');
         console.log(user.Email);
 
         if (Email != user.Email) {

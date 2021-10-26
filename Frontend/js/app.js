@@ -22,7 +22,7 @@ function ajax() {
             } else if (window.location.pathname == "/usuarios") {
 
                 const modal = bootstrap.Modal.getInstance(document.getElementById('createModal'));
-                
+
 
                 setTimeout(() => {
 
@@ -30,16 +30,28 @@ function ajax() {
 
                 }, 3000);
 
-                document.getElementById('formulario').style.display = 'block'
+                document.getElementById('formulario').style.display = 'block';
+
                 setTimeout(() => {
 
                     document.getElementById('mensaje').style.display = 'none'
 
                 }, 3000);
 
+                const registerFormulario = document.getElementById("formulario");
+                registerFormulario.reset();
+
+                document.getElementById('RegisterInvalidEmail').style.display = "none";
 
             }
 
+            document.getElementById("formulario").style.display = "none";
+
+            setTimeout(() => {
+
+                document.getElementById("formulario").style.display = "block";
+
+            }, 4000);
 
         }
 
@@ -55,7 +67,9 @@ function ajax() {
         Contrasena: document.getElementById('_contrasena').value
     }
 
-    xhttp.send(JSON.stringify(data));
+    xhttp.send(JSON.stringify(data))
+    // registerFormulario.style.display = "none";
+
 }
 
 //Esta funcion es (Login), envia data al servidor y la compara.
@@ -121,7 +135,7 @@ if (window.location.pathname == '/usuarios') {
             }
         }
 
-        xhttp.send(localtoken);
+        xhttp.send();
 
     })();
 
@@ -157,10 +171,13 @@ function Update(_id) {
                 console.log(this.responseText);
 
                 const modal = bootstrap.Modal.getInstance(document.getElementById('editModal'));
-                
+
                 modal.hide();
 
+                // user._id.insertAdjacentElement('beforeend', tableRow);
+                
             }
+
 
         }
 
@@ -207,7 +224,7 @@ function Delete(_id) {
                 row.remove();
 
                 const modal = bootstrap.Modal.getInstance(document.getElementById('deleteModal'));
-               
+
 
                 modal.hide()
 
