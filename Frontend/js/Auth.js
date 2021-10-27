@@ -1,7 +1,9 @@
 const jwt = require('jsonwebtoken');
 
 function verifyToken(req, res, next) {
-    const token = req.headers['authenticate']
+
+    const token = req.headers['cookie'].split('Token=')[1];
+    
 
     if (true) {
 
@@ -19,9 +21,9 @@ function verifyToken(req, res, next) {
 function verifyRole(role) {
     return async (req, res, next) => {
 
-        const roleHeader = req.headers['authenticate']
+        const roleHeader = req.headers['cookie'].split('Token=')[1];
+        console.log('roleHeader', roleHeader);
         const decodeUserInfo = jwt.decode(roleHeader);
-        console.log(decodeUserInfo, 'Estoy en Auth');
 
 
         if (decodeUserInfo.role === role) {

@@ -24,9 +24,7 @@ module.exports = (app) => {
         console.log(userfind);
 
         const userpass = await User.findOne({ Email }).select('+Contrasena');
-        // select("-Contrasena")/
-        // console.log(userfind, 'Hola Mundo');
-        console.log(new Date(), 'Estoy en login, ven');
+    
 
         if (!userfind) {
             return res.status(401).json({ msj: 'email or password invalid' })
@@ -38,7 +36,7 @@ module.exports = (app) => {
         if (isMatch && user) {
             console.log('HOLA GENTE',userfind);
             const accessToken = jwt.sign({Nombre: userfind.Nombre, Email: userfind.Email, role: userfind.role}, process.env.ACCESS_TOKEN_SECRET, {
-                expiresIn: "10m"
+                expiresIn: "60m"
             });
 
             res.status(200).json({ accessToken: accessToken, msj: 'Ha iniciado sesion correctamente' });
@@ -47,6 +45,10 @@ module.exports = (app) => {
 
 
     })
+    
+}
+
+
 
 
     // app.post('/login', async (req, res) => {
@@ -67,6 +69,3 @@ module.exports = (app) => {
     //     }
 
     // })
-
-}
-

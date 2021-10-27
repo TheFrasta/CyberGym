@@ -16,7 +16,7 @@ module.exports = (app) => {
 
    
         const { Nombre, Email, Contrasena } = req.body;
-        const user = new User({ Nombre, Email, Contrasena })
+        const user = new User({ Nombre, Email, Contrasena, role: "user" })
         const email = await User.findOne({ Email })
         const salt = await bcrypt.genSalt(10);
         user.Contrasena = await bcrypt.hash(user.Contrasena, salt);

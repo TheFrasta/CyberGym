@@ -85,10 +85,13 @@ function ajaxlog() {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             console.log(this.responseText);
-            localStorage.setItem("tokens", JSON.stringify({
-                accessToken: JSON.parse(xhttp.response).accessToken
-            })),
-                document.getElementById('LogInFormulario').style.display = 'none'
+
+            const accessToken =  JSON.parse(xhttp.response).accessToken;
+            document.cookie = `Token=${accessToken}`;
+            console.log(document.cookie);
+
+            
+            document.getElementById('LogInFormulario').style.display = 'none'
             document.getElementById('GotoInventory').style.display = 'block'
             setTimeout(() => {
                 window.location.href = '/usuarios'
@@ -122,8 +125,10 @@ if (window.location.pathname == '/usuarios') {
         xhttp.open("GET", "/get-user",);
         xhttp.setRequestHeader('Content-Type', 'application/json')
 
-        const localtoken = JSON.parse(localStorage.getItem("tokens")).accessToken;
-        xhttp.setRequestHeader('authenticate', localtoken);
+        // const localtoken = JSON.parse(localStorage.getItem("tokens")).accessToken;
+        // xhttp.setRequestHeader('authenticate', localtoken);
+
+        document.cookie
 
         xhttp.onreadystatechange = function () {
 
@@ -175,7 +180,7 @@ function Update(_id) {
                 modal.hide();
 
                 // user._id.insertAdjacentElement('beforeend', tableRow);
-                
+
             }
 
 
@@ -319,7 +324,7 @@ function TablaUsuarios(usertb) {
     // modal.hide();
 
 
-
 }
 
+const cookie = document.cookie.split('Token=')[1];
 
