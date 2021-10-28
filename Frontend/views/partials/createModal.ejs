@@ -36,15 +36,28 @@
             <input type="password" id="_contrasena" class="form-control" placeholder="Ingrese su Contraseña"
               required="">
 
-            <!--Esto es una alerta-->
-            <div id="RegisterInvalidEmail" style="display:none" class="alert alert-danger" role="alert">El email ya esta
-              en uso</div>
 
-            <!--Modal Footer-->
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-              <button type="submit" class="btn btn-primary">Guardar</button>
+            <!--Listado de Roles-->
+            <div class="form-group" id="roldiv">
+              <label for="_roles"><h4>Roles para escoger<h4></label>
+              <select class="form-control" id="_selectRoleCreate">
+                <option>SuperAdmin</option>
+                <option>Admin</option>
+                <option>Supervisor</option>
+              </select>
             </div>
+
+
+              <!--Esto es una alerta-->
+              <div id="RegisterInvalidEmail" style="display:none" class="alert alert-danger" role="alert">El email ya
+                esta
+                en uso</div>
+
+              <!--Modal Footer-->
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+              </div>
           </form>
         </div>
       </div>
@@ -52,7 +65,8 @@
   </div>
 </div>
 
- <!-- Button trigger modal -->
- <button id="addUserModal" type="button" class="btn btn-outline-dark d-none" data-bs-toggle="modal" data-bs-target="#createModal">
+<!-- Button trigger modal -->
+<button id="addUserModal" type="button" class="btn btn-outline-dark d-none" data-bs-toggle="modal"
+  data-bs-target="#createModal">
   Crear Usuario Nuevo
 </button>

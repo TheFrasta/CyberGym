@@ -43,6 +43,7 @@ function ajax() {
 
                 document.getElementById('RegisterInvalidEmail').style.display = "none";
 
+
             }
 
             document.getElementById("formulario").style.display = "none";
@@ -61,14 +62,16 @@ function ajax() {
 
     }
 
-    var data = {
+    
+    var data = JSON.stringify({
         Nombre: document.getElementById('_nombre').value,
         Email: document.getElementById('_email').value,
-        Contrasena: document.getElementById('_contrasena').value
-    }
+        Contrasena: document.getElementById('_contrasena').value,
+        role: document.getElementById('_selectRoleCreate').value
+    })
 
-    xhttp.send(JSON.stringify(data))
-    // registerFormulario.style.display = "none";
+    console.log(document.getElementById('_selectRoleCreate'));
+    xhttp.send(data);
 
 }
 
@@ -125,9 +128,6 @@ if (window.location.pathname == '/usuarios') {
         xhttp.open("GET", "/get-user",);
         xhttp.setRequestHeader('Content-Type', 'application/json')
 
-        // const localtoken = JSON.parse(localStorage.getItem("tokens")).accessToken;
-        // xhttp.setRequestHeader('authenticate', localtoken);
-
         document.cookie
 
         xhttp.onreadystatechange = function () {
@@ -159,9 +159,11 @@ function Update(_id) {
         //Inputs de mi formulario editModal
         const nombreEdit = document.getElementById('_nombreEdit');
         const emailEdit = document.getElementById('_emailEdit');
+        const roleEdit = document.getElementById('_selectRol');
 
         nombreEdit.value = actualrow[2].innerHTML;
         emailEdit.value = actualrow[3].innerHTML;
+        roleEdit.value = actualrow[4].innerHTML;
 
     } else {
 
@@ -257,11 +259,11 @@ function Delete(_id) {
 
 
 //Tabla de Usuarios creada en JS.
-function TablaUsuarios(usertb) {
+function TablaUsuarios(users) {
 
     const tbody = document.getElementById("t-body");
 
-    usertb.forEach((user, i) => {
+    users.forEach((user, i) => {
 
         //Tabla de Usuarios.
         const tableRow = document.createElement('tr');
@@ -276,6 +278,8 @@ function TablaUsuarios(usertb) {
         tableDataNombre.innerHTML = user.Nombre
         const tableDataEmail = document.createElement('td');
         tableDataEmail.innerHTML = user.Email
+        const tableDataRole = document.createElement('td');
+        tableDataRole.innerHTML = user.role
         const tableDataOptions = document.createElement('td');
         //Lista Ordenada de usuarios.
         const listUl = document.createElement('ul');
@@ -315,6 +319,7 @@ function TablaUsuarios(usertb) {
         tableRow.insertAdjacentElement('beforeend', tableDataId);
         tableRow.insertAdjacentElement('beforeend', tableDataNombre);
         tableRow.insertAdjacentElement('beforeend', tableDataEmail);
+        tableRow.insertAdjacentElement('beforeend', tableDataRole);
         tableRow.insertAdjacentElement('beforeend', tableDataOptions);
 
 

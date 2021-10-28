@@ -14,32 +14,53 @@ module.exports = (app) => {
 
     app.post('/register', async (req, res) => {
 
-   
-        const { Nombre, Email, Contrasena } = req.body;
-        const user = new User({ Nombre, Email, Contrasena, role: "user" })
-        const email = await User.findOne({ Email })
+        const { Nombre, Email, Contrasena, role } = req.body;
+        console.log(role);
+        const user = new User({ Nombre, Email, Contrasena, role });
+        const email = await User.findOne({ Email });
         const salt = await bcrypt.genSalt(10);
         user.Contrasena = await bcrypt.hash(user.Contrasena, salt);
 
+
         if (email) {
 
-            return res.status(401).json({ msj: 'El email ya esta en uso' })
+            return res.status(401).json({ msj: 'El email ya esta en uso' });
+        }
+
+        if (role == undefined) {
+
+            console.log(role);
+            res.status(200).json({ msj: 'El usuario fue registrado' });
+            const user = new User({ Nombre, Email, Contrasena, role: "user" })
+            user.save();
+
+        } else {
+
+            const user = new User
+                ({
+                    Nombre,
+                    Email,
+                    Contrasena,
+                    role
+                });
+            user.save();
 
         }
 
-        user.save(err => {
 
-            if (err) {
+        // user.save(err => {
 
-                res.status(500).json({ msj: 'Error al registrar el usuario' });
+        //     if (err) {
 
-            } else {
+        //         res.status(500).json({ msj: 'Error al registrar el usuario' });
 
-                res.status(200).json({ msj: 'Usuario registrado correctamente' });
-            }
+        //     } else {
+
+        //         res.status(200).json({ msj: 'Usuario registrado correctamente' });
+        //     }
 
 
-        });
+        // });
 
     });
 
