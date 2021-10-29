@@ -30,26 +30,30 @@ module.exports = (app) => {
 
         if (role == null) {
 
-            console.log(role);
+            console.log(role, "Register.js");
             res.status(200).json({ msj: 'El usuario fue registrado' });
             const user = new User({ Nombre, Email, Contrasena, role: "user" })
             user.save();
 
         } else {
 
-            res.status(200).json({msj: 'Usuario '})
+            res.status(200).json({ msj: 'Usuario ' })
             const user = new User
 
-            ({
-                Nombre,
-                Email,
-                Contrasena,
-                role
-            });
-            
+                ({
+                    Nombre,
+                    Email,
+                    Contrasena,
+                    role
+                });
+
             user.save();
-            
+
         }
+
+    });
+
+}
 
 
         // user.save(err => {
@@ -65,9 +69,5 @@ module.exports = (app) => {
 
 
         // });
-
-    });
-
-}
 
 

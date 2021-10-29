@@ -62,7 +62,8 @@ function ajax() {
 
     }
 
-   const role = document.getElementById('_selectRoleCreate')
+    const role = document.getElementById('_selectRoleCreate')
+    
 
     if(role){
 
@@ -70,7 +71,7 @@ function ajax() {
             Nombre:         document.getElementById('_nombre').value,
             Email:          document.getElementById('_email').value,
             Contrasena:     document.getElementById('_contrasena').value,
-            role:           document.getElementById('_selectRoleCreate').value
+            role:           role.value.toLowerCase()
         })
     
         xhttp.send(data);
