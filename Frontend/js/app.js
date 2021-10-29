@@ -62,17 +62,32 @@ function ajax() {
 
     }
 
+   const role = document.getElementById('_selectRoleCreate')
+
+    if(role){
+
+        var data = JSON.stringify({
+            Nombre:         document.getElementById('_nombre').value,
+            Email:          document.getElementById('_email').value,
+            Contrasena:     document.getElementById('_contrasena').value,
+            role:           document.getElementById('_selectRoleCreate').value
+        })
     
-    var data = JSON.stringify({
-        Nombre: document.getElementById('_nombre').value,
-        Email: document.getElementById('_email').value,
-        Contrasena: document.getElementById('_contrasena').value,
-        role: document.getElementById('_selectRoleCreate').value
-    })
+        xhttp.send(data);
+    
+    } else {
+       
+        var data = JSON.stringify({
+            Nombre:         document.getElementById('_nombre').value,
+            Email:          document.getElementById('_email').value,
+            Contrasena:     document.getElementById('_contrasena').value,
+            role:           "user"
+        })
+    
+        xhttp.send(data);
 
-    console.log(document.getElementById('_selectRoleCreate'));
-    xhttp.send(data);
-
+    }
+   
 }
 
 //Esta funcion es (Login), envia data al servidor y la compara.

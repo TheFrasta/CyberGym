@@ -13,7 +13,7 @@ module.exports = (app) => {
 
     });
 
-    app.get('/get-user', verifyToken, verifyRole('superadmin'), async (req, res) => {
+    app.get('/get-user', verifyToken, verifyRole('superadmin','admin'), async (req, res) => {
         
         const user = await User.find()
         res.status(200).json({ users: user })

@@ -15,19 +15,20 @@ module.exports = (app) => {
     app.post('/register', async (req, res) => {
 
         const { Nombre, Email, Contrasena, role } = req.body;
-        console.log(role);
         const user = new User({ Nombre, Email, Contrasena, role });
         const email = await User.findOne({ Email });
         const salt = await bcrypt.genSalt(10);
         user.Contrasena = await bcrypt.hash(user.Contrasena, salt);
 
+        console.log(role);
 
         if (email) {
 
             return res.status(401).json({ msj: 'El email ya esta en uso' });
+
         }
 
-        if (role == undefined) {
+        if (role == null) {
 
             console.log(role);
             res.status(200).json({ msj: 'El usuario fue registrado' });
@@ -36,15 +37,18 @@ module.exports = (app) => {
 
         } else {
 
+            res.status(200).json({msj: 'Usuario '})
             const user = new User
-                ({
-                    Nombre,
-                    Email,
-                    Contrasena,
-                    role
-                });
-            user.save();
 
+            ({
+                Nombre,
+                Email,
+                Contrasena,
+                role
+            });
+            
+            user.save();
+            
         }
 
 
