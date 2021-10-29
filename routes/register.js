@@ -33,6 +33,7 @@ module.exports = (app) => {
             console.log(role, "Register.js");
             res.status(200).json({ msj: 'El usuario fue registrado' });
             const user = new User({ Nombre, Email, Contrasena, role: "user" })
+            user.Contrasena = await bcrypt.hash(user.Contrasena, salt);
             user.save();
 
         } else {
@@ -47,6 +48,7 @@ module.exports = (app) => {
                     role
                 });
 
+            user.Contrasena = await bcrypt.hash(user.Contrasena, salt);
             user.save();
 
         }
